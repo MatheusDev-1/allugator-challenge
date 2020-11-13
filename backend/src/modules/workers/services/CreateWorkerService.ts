@@ -9,7 +9,7 @@ import IWorkersRepository from '../repositories/IWorkersRepository';
 
 interface Request {
   role: string;
-  cpf: number;
+  cpf: string;
   name: string;
   uf: string;
   salary: number;
@@ -34,6 +34,8 @@ class CreateWorkerService {
     status,
   }: Request): Promise<Worker | undefined> {
     const workerExistenceByCPF = await this.workersRepository.findByCPF(cpf);
+    console.log(cpf);
+    console.log(workerExistenceByCPF);
 
     if (workerExistenceByCPF) {
       throw new AppError('CPF already used by another worker');

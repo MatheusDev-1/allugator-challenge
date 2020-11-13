@@ -4,26 +4,44 @@ export default class CreateUsers1597807100485 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'workers',
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'int',
+            isUnique: true,
             isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
             type: 'varchar',
           },
           {
-            name: 'email',
+            name: 'cpf',
             type: 'varchar',
-            isUnique: true,
           },
           {
-            name: 'password',
+            name: 'role',
+            type: 'varchar',
+          },
+          {
+            name: 'salary',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'uf',
+            type: 'varchar',
+          },
+          {
+            name: 'status',
+            type: 'varchar',
+          },
+          {
+            name: 'createdDate',
             type: 'varchar',
           },
           {
@@ -42,6 +60,6 @@ export default class CreateUsers1597807100485 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('workers');
   }
 }

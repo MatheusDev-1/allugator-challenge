@@ -2,7 +2,7 @@ import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository
 import ICreateUserDTO from '@modules/workers/dtos/ICreateWorkerDTO';
 import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
 
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from 'uuid';
 import Worker from '../../infra/typeorm/entities/Worker';
 
 class FakeWorkerRepository implements IWorkersRepository {
@@ -23,7 +23,7 @@ class FakeWorkerRepository implements IWorkersRepository {
     return workers;
   }
 
-  public async findByCPF(cpf: number): Promise<Worker | undefined> {
+  public async findByCPF(cpf: string): Promise<Worker | undefined> {
     const findWorker = this.workers.find(worker => worker.cpf === cpf);
 
     return findWorker;
@@ -52,7 +52,7 @@ class FakeWorkerRepository implements IWorkersRepository {
   public async create(workerData: ICreateUserDTO): Promise<Worker> {
     const worker = new Worker();
 
-    Object.assign(worker, { id: uuid() }, workerData);
+    Object.assign(worker, { id: uuid_v4() }, workerData);
 
     this.workers.push(worker);
 

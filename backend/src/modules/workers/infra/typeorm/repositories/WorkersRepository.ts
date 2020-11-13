@@ -37,25 +37,27 @@ class WorkersRepository implements IWorkersRepository {
     status,
     role,
     uf,
-    createdDate = String(new Date().toLocaleDateString()),
+    createdDate,
   }: ICreateWorkerDTO): Promise<Worker> {
     const newWorker = await this.ormRepository.create({
       name,
       cpf,
       salary,
-      status,
+      status: 'ATIVO',
       role,
       uf,
-      createdDate,
+      createdDate: String(new Date().toLocaleDateString()),
     });
+
+    console.log(newWorker);
 
     await this.ormRepository.save(newWorker);
 
     return newWorker;
   }
 
-  public async findByCPF(CPF: number): Promise<Worker | undefined> {
-    const worker = await this.ormRepository.findOne(CPF);
+  public async findByCPF(cpf: number): Promise<Worker | undefined> {
+    const worker = await this.ormRepository.findOne({ where: { cpf } });
 
     return worker;
   }
@@ -72,14 +74,14 @@ class WorkersRepository implements IWorkersRepository {
   }
 
   public async findByRole(role: string): Promise<Worker[]> {
-    const worker = await this.ormRepository.find({ where: role });
+    const worker = await this.ormRepository.find({ where: { role } });
 
     return worker;
   }
 
   public async findByUF(uf: string): Promise<Worker[]> {
     const workersByUF = await this.ormRepository.find({
-      where: uf,
+      where: { uf },
     });
 
     return workersByUF;

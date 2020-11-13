@@ -1,7 +1,7 @@
 export default interface ICreateWorkerDTO {
   createdDate?: string;
   role: string;
-  cpf: number;
+  cpf: string;
   name: string;
   uf: string;
   salary: number;

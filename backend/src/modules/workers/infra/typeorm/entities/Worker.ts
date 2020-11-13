@@ -8,8 +8,8 @@ import {
 
 @Entity('workers')
 class Worker {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   createdDate: string;
@@ -18,7 +18,7 @@ class Worker {
   role: string;
 
   @Column()
-  cpf: number;
+  cpf: string;
 
   @Column()
   name: string;
