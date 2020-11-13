@@ -12,7 +12,7 @@ class Worker {
   id: string;
 
   @Column()
-  createdDate?: string;
+  createdDate: string;
 
   @Column()
   role: string;

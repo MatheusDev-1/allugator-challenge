@@ -60,9 +60,9 @@ class WorkersRepository implements IWorkersRepository {
     return worker;
   }
 
-  public async findByDate(Date: Date): Promise<Worker | undefined> {
-    const worker = await this.ormRepository.findOne(Date);
-    return worker;
+  public async findByDate(createdDate: string): Promise<Worker[]> {
+    const workers = await this.ormRepository.find({ where: { createdDate } });
+    return workers;
   }
 
   public async findByName(name: string): Promise<Worker | undefined> {
@@ -71,8 +71,8 @@ class WorkersRepository implements IWorkersRepository {
     return worker;
   }
 
-  public async findByRole(role: string): Promise<Worker | undefined> {
-    const worker = await this.ormRepository.findOne(role);
+  public async findByRole(role: string): Promise<Worker[]> {
+    const worker = await this.ormRepository.find({ where: role });
 
     return worker;
   }

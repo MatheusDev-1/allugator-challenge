@@ -8,7 +8,7 @@ import Worker from '../../infra/typeorm/entities/Worker';
 class FakeWorkerRepository implements IWorkersRepository {
   private workers: Worker[] = [];
 
-  public async findAllProviders({
+  public async findAllWorkers({
     role,
     uf,
     status,
@@ -24,21 +24,29 @@ class FakeWorkerRepository implements IWorkersRepository {
   }
 
   public async findByCPF(cpf: number): Promise<Worker | undefined> {
-    const findUser = this.workers.find(worker => worker.cpf === cpf);
+    const findWorker = this.workers.find(worker => worker.cpf === cpf);
 
-    return findUser;
+    return findWorker;
   }
 
   public async findByName(name: string): Promise<Worker | undefined> {
-    const findUser = this.workers.find(worker => worker.name === name);
+    const findWorker = this.workers.find(worker => worker.name === name);
 
-    return findUser;
+    return findWorker;
   }
 
-  public async findByDate(date: string): Promise<Worker | undefined> {
-    const findUser = this.workers.find(worker => worker.date === date);
+  public async findByDate(createdDate: string): Promise<Worker[]> {
+    const findWorker = this.workers.filter(
+      worker => worker.createdDate === createdDate,
+    );
 
-    return findUser;
+    return findWorker;
+  }
+
+  public async findByRole(role: string): Promise<Worker[]> {
+    const findWorker = this.workers.filter(worker => worker.role === role);
+
+    return findWorker;
   }
 
   public async create(workerData: ICreateUserDTO): Promise<Worker> {
