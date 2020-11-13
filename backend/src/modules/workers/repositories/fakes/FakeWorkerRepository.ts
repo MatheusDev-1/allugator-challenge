@@ -1,6 +1,5 @@
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
 import ICreateUserDTO from '@modules/workers/dtos/ICreateWorkerDTO';
-import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
 
 import { v4 as uuid_v4 } from 'uuid';
 import Worker from '../../infra/typeorm/entities/Worker';
@@ -8,19 +7,8 @@ import Worker from '../../infra/typeorm/entities/Worker';
 class FakeWorkerRepository implements IWorkersRepository {
   private workers: Worker[] = [];
 
-  public async findAllWorkers({
-    role,
-    uf,
-    status,
-  }: IFindAllWorkersDTO): Promise<Worker[]> {
-    let { workers } = this;
-
-    workers = this.workers.filter(
-      worker =>
-        worker.role === role || worker.uf === uf || worker.status === status,
-    );
-
-    return workers;
+  public async findAllWorkers(): Promise<Worker[]> {
+    return this.workers;
   }
 
   public async findByCPF(cpf: string): Promise<Worker | undefined> {

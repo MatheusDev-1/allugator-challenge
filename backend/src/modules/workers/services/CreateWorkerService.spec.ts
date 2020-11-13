@@ -5,7 +5,7 @@ import CreateWorkerService from './CreateWorkerService';
 let fakeWorkerRepository: FakeWorkerRepository;
 let createWorker: CreateWorkerService;
 
-describe('CreateAppointment', () => {
+describe('Create Worker', () => {
   beforeEach(() => {
     fakeWorkerRepository = new FakeWorkerRepository();
 

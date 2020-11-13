@@ -3,7 +3,7 @@ import ICreateWorkerDTO from '../dtos/ICreateWorkerDTO';
 import IFindAllWorkersDTO from '../dtos/IFindAllWorkersDTO';
 
 export default interface IWorkersRepository {
-  findAllWorkers(data: IFindAllWorkersDTO): Promise<Worker[]>;
+  findAllWorkers(data?: IFindAllWorkersDTO): Promise<Worker[]>;
   findByName(name: string): Promise<Worker | undefined>;
   findByCPF(cpf: string): Promise<Worker | undefined>;
   findByRole(role: string): Promise<Worker[]>;

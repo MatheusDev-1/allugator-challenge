@@ -13,18 +13,7 @@ class WorkersRepository implements IWorkersRepository {
     this.ormRepository = getRepository(Worker);
   }
 
-  public async findAllWorkers({
-    role,
-    status,
-    uf,
-  }: IFindAllWorkersDTO): Promise<Worker[]> {
-    if (role || status || uf) {
-      const queriedWorkers = await this.ormRepository.find({
-        where: { role, status, uf },
-      });
-
-      return queriedWorkers;
-    }
+  public async findAllWorkers(): Promise<Worker[]> {
     const allWorkers = await this.ormRepository.find();
 
     return allWorkers;

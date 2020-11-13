@@ -6,6 +6,8 @@ import WorkersController from '../controllers/WorkersController';
 const workersRouter = Router();
 const workersController = new WorkersController();
 
+workersRouter.get('/', workersController.show);
+
 workersRouter.post(
   '/',
   celebrate({
