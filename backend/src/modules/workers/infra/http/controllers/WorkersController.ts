@@ -20,4 +20,10 @@ export default class WorkersController {
 
     return response.json(worker);
   }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const createWorker = container.resolve(CreateWorkerService);
+
+    
+  }
 }

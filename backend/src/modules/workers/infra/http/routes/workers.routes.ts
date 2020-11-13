@@ -11,7 +11,7 @@ workersRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      cpf: Joi.number().required(),
+      cpf: Joi.string().required(),
       createdDate: Joi.date(),
       role: Joi.string(),
       uf: Joi.string(),

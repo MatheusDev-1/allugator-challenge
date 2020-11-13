@@ -56,7 +56,7 @@ class WorkersRepository implements IWorkersRepository {
     return newWorker;
   }
 
-  public async findByCPF(cpf: number): Promise<Worker | undefined> {
+  public async findByCPF(cpf: string): Promise<Worker | undefined> {
     const worker = await this.ormRepository.findOne({ where: { cpf } });
 
     return worker;
