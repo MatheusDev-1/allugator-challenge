@@ -9,7 +9,7 @@ import {
 @Entity('workers')
 class Worker {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   createdDate: string;
