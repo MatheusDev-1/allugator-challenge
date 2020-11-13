@@ -2,8 +2,6 @@ import 'reflect-metadata';
 
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
-
 import Worker from '../infra/typeorm/entities/Worker';
 import IWorkersRepository from '../repositories/IWorkersRepository';
 
@@ -36,9 +34,11 @@ class CreateWorkerService {
     const workerExistenceByCPF = await this.workersRepository.findByCPF(cpf);
 
     if (workerExistenceByCPF) {
-      throw new AppError('CPF already used by another worker');
+      const updateWorker = await this.workersRepository.create(
+        workerExistenceByCPF,
+      );
+      return updateWorker;
     }
-
     const worker = await this.workersRepository.create({
       createdDate,
       role,

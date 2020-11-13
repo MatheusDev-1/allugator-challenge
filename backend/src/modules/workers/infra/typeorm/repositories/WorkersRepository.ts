@@ -38,8 +38,6 @@ class WorkersRepository implements IWorkersRepository {
       createdDate: String(new Date().toLocaleDateString()),
     });
 
-    console.log(newWorker);
-
     await this.ormRepository.save(newWorker);
 
     return newWorker;

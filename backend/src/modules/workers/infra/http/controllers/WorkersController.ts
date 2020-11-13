@@ -25,7 +25,7 @@ export default class WorkersController {
   public async show(request: Request, response: Response): Promise<Response> {
     const listWorkersService = container.resolve(ListWorkersService);
 
-    const workers = listWorkersService.execute();
+    const workers = await listWorkersService.execute();
 
     return response.json(workers);
   }

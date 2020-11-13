@@ -1,4 +1,3 @@
-import AppError from '@shared/errors/AppError';
 import FakeWorkerRepository from '../repositories/fakes/FakeWorkerRepository';
 import CreateWorkerService from './CreateWorkerService';
 
@@ -27,8 +26,8 @@ describe('Create Worker', () => {
     expect(worker).toHaveProperty('name');
   });
 
-  it('should not be able to create two workers with the same CPF', async () => {
-    await await createWorker.execute({
+  it('should be able to update worker if already exists', async () => {
+    const worker = await createWorker.execute({
       name: 'Juninho Alligator',
       salary: 3000,
       cpf: '12345678909',
@@ -38,16 +37,16 @@ describe('Create Worker', () => {
       uf: 'DF',
     });
 
-    expect(
-      createWorker.execute({
-        name: 'Maria Alligator',
-        salary: 8000,
-        cpf: '12345678909',
-        status: 'ATIVO',
-        role: 'Designer',
-        createdDate: '08/11/2020',
-        uf: 'SP',
-      }),
-    ).rejects.toBeInstanceOf(AppError);
+    const updatedWorker = await createWorker.execute({
+      name: 'Maria Alligator',
+      salary: 8000,
+      cpf: '12345678909',
+      status: 'ATIVO',
+      role: 'Designer',
+      createdDate: '08/11/2020',
+      uf: 'SP',
+    });
+
+    expect(updatedWorker).toEqual(worker);
   });
 });
