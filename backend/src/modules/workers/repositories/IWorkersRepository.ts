@@ -12,7 +12,7 @@ export default interface IWorkersRepository {
   findByName(name: string): Promise<Worker | undefined>;
   findByCPF(cpf: string): Promise<Worker | undefined>;
   findByUF(uf: string): Promise<Worker[]>;
-  findBySalary(minSalary: number, maxSalary: number): Promise<Worker[]>;
+  groupByUf(): Promise<any>;
   deleteWorker(worker: Worker): Promise<any>;
   createWorker(data: ICreateWorkerDTO): Promise<Worker>;
   saveORM(user: Worker): Promise<Worker>;

@@ -54,15 +54,16 @@ class FakeWorkerRepository implements IWorkersRepository {
     return workersByUF;
   }
 
-  public async findBySalary(
-    minSalary: number,
-    maxSalary: number,
-  ): Promise<Worker[]> {
-    const workersBySalary = this.workers.filter(
-      worker => worker.salary >= minSalary && worker.salary <= maxSalary,
-    );
+  public async groupByUf(): Promise<any> {
+    const listUf = Array.from(new Set(this.workers.map(worker => worker.uf)));
 
-    return workersBySalary;
+    const grouped = listUf.map(uf => ({
+      UF: uf,
+      quantity: this.workers.filter(worker => worker.uf === uf).length,
+      workers: this.workers.filter(worker => worker.uf === uf),
+    }));
+
+    return grouped;
   }
 
   public async deleteWorker(worker: Worker): Promise<any> {

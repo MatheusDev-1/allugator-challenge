@@ -4,6 +4,7 @@ import CreateWorkerService from '@modules/workers/services/CreateWorkerService';
 import DeleteWorkerService from '@modules/workers/services/DeleteWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
 import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
+import ListGroupedWorkersByUfService from '@modules/workers/services/ListGroupedWorkersByUfService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
 import { Between } from 'typeorm';
 
@@ -32,7 +33,6 @@ export default class WorkersController {
       role,
       uf,
       status,
-      salary,
       minSalary,
       maxSalary,
     } = request.query;
@@ -74,6 +74,17 @@ export default class WorkersController {
     const workers = await listWorkerByNameService.execute(name);
 
     return response.json(workers);
+  }
+
+  public async indexByUf(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const groupByUfService = container.resolve(ListGroupedWorkersByUfService);
+
+    const groupedWorkersByUf = await groupByUfService.execute();
+
+    return response.json(groupedWorkersByUf);
   }
 
   public async import(request: Request, response: Response): Promise<Response> {

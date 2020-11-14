@@ -1,4 +1,4 @@
-import { getRepository, Repository, Between, EntityRepository } from 'typeorm';
+import { getRepository, Repository, EntityRepository } from 'typeorm';
 
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
 import ICreateWorkerDTO from '@modules/workers/dtos/ICreateWorkerDTO';
@@ -69,15 +69,18 @@ class WorkersRepository
     return workersByUF;
   }
 
-  public async findBySalary(
-    minSalary: number,
-    maxSalary: number,
-  ): Promise<Worker[]> {
-    const worker = await this.ormRepository.find({
-      salary: Between(minSalary, maxSalary),
-    });
+  public async groupByUf(): Promise<any> {
+    const workersByUF = await this.findAllWorkers({});
 
-    return worker;
+    const listUf = Array.from(new Set(workersByUF.map(worker => worker.uf)));
+
+    const grouped = listUf.map(uf => ({
+      UF: uf,
+      quantity: workersByUF.filter(worker => worker.uf === uf).length,
+      workers: workersByUF.filter(worker => worker.uf === uf),
+    }));
+
+    return grouped;
   }
 
   public async deleteWorker(worker: Worker): Promise<any> {
