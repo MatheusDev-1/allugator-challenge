@@ -29,7 +29,7 @@ class WorkersRepository
     role,
     uf,
     status = 'ATIVO',
-    createdDate = String(new Date().toLocaleDateString()),
+    createdDate = new Date().toLocaleDateString(),
   }: ICreateWorkerDTO): Promise<Worker> {
     const newWorker = await this.ormRepository.create({
       name,

@@ -6,7 +6,7 @@ let fakeWorkerRepository: FakeWorkerRepository;
 let createWorker: CreateWorkerService;
 let listWorkers: ListWorkersService;
 
-describe('List workers', () => {
+describe('List all workers', () => {
   beforeEach(() => {
     fakeWorkerRepository = new FakeWorkerRepository();
     createWorker = new CreateWorkerService(fakeWorkerRepository);

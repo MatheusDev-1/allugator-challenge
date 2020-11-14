@@ -28,15 +28,9 @@ class ImportCSV {
     const parseCSV = workersReadstream.pipe(parserConfig);
 
     parseCSV.on('data', async line => {
-      const [
-        createdDate,
-        role,
-        cpf,
-        name,
-        uf,
-        salary,
-        status,
-      ] = line.map((cell: string) => cell.trim());
+      const [createdDate, role, cpf, name, uf, salary, status] = line.map(
+        (cell: string | number) => cell,
+      );
 
       if (!createdDate || !role || !cpf || !name || !uf || !salary || !status)
         return;

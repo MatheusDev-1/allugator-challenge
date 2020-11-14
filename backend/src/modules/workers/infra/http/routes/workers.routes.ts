@@ -15,11 +15,11 @@ workersRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
-      cpf: Joi.string().required(),
+      name: Joi.string().required().max(256),
+      cpf: Joi.string().required().max(11),
       createdDate: Joi.date(),
       role: Joi.string(),
-      uf: Joi.string(),
+      uf: Joi.string().max(2),
       salary: Joi.number(),
       status: Joi.string(),
     },

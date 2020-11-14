@@ -5,6 +5,7 @@ const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig.json')
 
 module.exports = {
+  
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -86,7 +87,7 @@ module.exports = {
   // modulePathIgnorePatterns: [],
 
   // Activates notifications for test results
-  // notify: false,
+  //notify: true,
 
   // An enum that specifies notification mode. Requires { notify: true }
   // notifyMode: "failure-change",

@@ -32,7 +32,7 @@ export default class WorkersController {
   }
 
   public async import(request: Request, response: Response): Promise<Response> {
-    const importCsvService = container.resolve(ImportCsvService);
+    const importCsvService = new ImportCsvService();
 
     await importCsvService.execute(request.file.path);
 

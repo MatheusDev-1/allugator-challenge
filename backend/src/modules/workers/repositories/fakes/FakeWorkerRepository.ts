@@ -1,7 +1,7 @@
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
 import ICreateUserDTO from '@modules/workers/dtos/ICreateWorkerDTO';
-
 import { v4 as uuid_v4 } from 'uuid';
+
 import Worker from '../../infra/typeorm/entities/Worker';
 
 class FakeWorkerRepository implements IWorkersRepository {
