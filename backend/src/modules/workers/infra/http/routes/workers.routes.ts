@@ -10,6 +10,7 @@ const workersController = new WorkersController();
 const upload = multer(uploadConfig);
 
 workersRouter.get('/', workersController.index);
+
 workersRouter.post('/import', upload.single('file'), workersController.import);
 workersRouter.post(
   '/',

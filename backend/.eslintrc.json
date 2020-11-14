@@ -32,6 +32,7 @@
       "class-methods-use-this": "off",
       "camelcase": "off",
       "no-console": "off",
+      "prefer-const": "off",
       "@typescript-eslint/camelcase": "off",
       "@typescript-eslint/no-unused-vars": ["error", {
         "argsIgnorePattern": "_"

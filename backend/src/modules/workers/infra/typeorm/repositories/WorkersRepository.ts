@@ -2,6 +2,7 @@ import { getRepository, Repository, Between, EntityRepository } from 'typeorm';
 
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
 import ICreateWorkerDTO from '@modules/workers/dtos/ICreateWorkerDTO';
+import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
 
 import Worker from '../entities/Worker';
 
@@ -16,8 +17,10 @@ class WorkersRepository
     this.ormRepository = getRepository(Worker);
   }
 
-  public async findAllWorkers(): Promise<Worker[]> {
-    const allWorkers = await this.ormRepository.find();
+  public async findAllWorkers(data: IFindAllWorkersDTO): Promise<Worker[]> {
+    const allWorkers = await this.ormRepository.find({
+      where: data,
+    });
 
     return allWorkers;
   }

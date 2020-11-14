@@ -2,12 +2,25 @@ import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository
 import ICreateUserDTO from '@modules/workers/dtos/ICreateWorkerDTO';
 import { v4 as uuid_v4 } from 'uuid';
 
+import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
 import Worker from '../../infra/typeorm/entities/Worker';
 
 class FakeWorkerRepository implements IWorkersRepository {
   private workers: Worker[] = [];
 
-  public async findAllWorkers(): Promise<Worker[]> {
+  public async findAllWorkers(data: IFindAllWorkersDTO): Promise<Worker[]> {
+    if (Object.keys(data).length >= 1) {
+      const queriedWorkers = this.workers.filter(
+        worker =>
+          worker.createdDate === data.createdDate ||
+          worker.role === data.role ||
+          worker.status === data.status ||
+          worker.uf === data.uf,
+      );
+
+      return queriedWorkers;
+    }
+
     return this.workers;
   }
 

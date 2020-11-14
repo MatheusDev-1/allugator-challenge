@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateWorkerService from '@modules/workers/services/CreateWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
+import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
 
 export default class WorkersController {
@@ -24,9 +25,41 @@ export default class WorkersController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { createdDate, role, uf, status } = request.query;
+
+    let where = {};
+
+    if (createdDate) {
+      Object.assign(where, { createdDate });
+    }
+    if (role) {
+      Object.assign(where, { role });
+    }
+    if (uf) {
+      Object.assign(where, { uf });
+    }
+    if (status) {
+      Object.assign(where, { status });
+    }
+
+    console.log(where);
+
     const listWorkersService = container.resolve(ListWorkersService);
 
-    const workers = await listWorkersService.execute();
+    const workers = await listWorkersService.execute(where);
+
+    return response.json(workers);
+  }
+
+  public async showByName(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { name } = request.body;
+
+    const listWorkerByNameService = container.resolve(ListWorkerByNameService);
+
+    const workers = await listWorkerByNameService.execute(name);
 
     return response.json(workers);
   }
