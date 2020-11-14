@@ -24,11 +24,6 @@ workersRouter.get(
   workersController.index,
 );
 
-workersRouter.get('/groupedByUf', workersController.indexByUf);
-
-workersRouter.delete('/:cpf', workersController.delete);
-workersRouter.post('/import', upload.single('file'), workersController.import);
-
 workersRouter.post(
   '/',
   celebrate({
@@ -44,5 +39,12 @@ workersRouter.post(
   }),
   workersController.create,
 );
+
+workersRouter.get('/groupedByUf', workersController.indexByUf);
+
+workersRouter.post('/import', upload.single('file'), workersController.import);
+workersRouter.get('/searchByName', workersController.searchByName);
+workersRouter.get('/searchByCPF', workersController.searchByCPF);
+workersRouter.delete('/:cpf', workersController.delete);
 
 export default workersRouter;

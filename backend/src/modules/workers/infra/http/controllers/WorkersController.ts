@@ -4,6 +4,7 @@ import CreateWorkerService from '@modules/workers/services/CreateWorkerService';
 import DeleteWorkerService from '@modules/workers/services/DeleteWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
 import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
+import ListWorkerByCpfService from '@modules/workers/services/ListWorkerByCpfService';
 import ListGroupedWorkersByUfService from '@modules/workers/services/ListGroupedWorkersByUfService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
 import { Between } from 'typeorm';
@@ -63,7 +64,7 @@ export default class WorkersController {
     return response.json(workers);
   }
 
-  public async showByName(
+  public async searchByName(
     request: Request,
     response: Response,
   ): Promise<Response> {
@@ -74,6 +75,19 @@ export default class WorkersController {
     const workers = await listWorkerByNameService.execute(name);
 
     return response.json(workers);
+  }
+
+  public async searchByCPF(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { cpf } = request.body;
+
+    const listWorkerByCpfService = container.resolve(ListWorkerByCpfService);
+
+    const workerByCpf = await listWorkerByCpfService.execute(cpf);
+
+    return response.json(workerByCpf);
   }
 
   public async indexByUf(
