@@ -10,7 +10,6 @@
 
 # production
 /build
-tmp/*
 !tmp/.gitkeep
 
 # misc

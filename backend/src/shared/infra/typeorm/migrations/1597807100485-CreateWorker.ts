@@ -32,7 +32,6 @@ export default class CreateUsers1597807100485 implements MigrationInterface {
             name: 'salary',
             type: 'decimal',
             precision: 10,
-            scale: 2,
           },
           {
             name: 'uf',

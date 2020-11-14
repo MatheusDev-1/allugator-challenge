@@ -34,12 +34,12 @@ class CreateWorkerService {
     const workerExistenceByCPF = await this.workersRepository.findByCPF(cpf);
 
     if (workerExistenceByCPF) {
-      const updateWorker = await this.workersRepository.create(
+      const updateWorker = await this.workersRepository.createWorker(
         workerExistenceByCPF,
       );
       return updateWorker;
     }
-    const worker = await this.workersRepository.create({
+    const worker = await this.workersRepository.createWorker({
       createdDate,
       role,
       cpf,

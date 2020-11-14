@@ -1,15 +1,18 @@
-import { getRepository, Repository, Between } from 'typeorm';
+import { getRepository, Repository, Between, EntityRepository } from 'typeorm';
 
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
-import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
 import ICreateWorkerDTO from '@modules/workers/dtos/ICreateWorkerDTO';
 
 import Worker from '../entities/Worker';
 
-class WorkersRepository implements IWorkersRepository {
+@EntityRepository(Worker)
+class WorkersRepository
+  extends Repository<Worker>
+  implements IWorkersRepository {
   private ormRepository: Repository<Worker>;
 
   constructor() {
+    super();
     this.ormRepository = getRepository(Worker);
   }
 
@@ -19,26 +22,26 @@ class WorkersRepository implements IWorkersRepository {
     return allWorkers;
   }
 
-  public async create({
+  public async createWorker({
     name,
     cpf,
     salary,
-    status,
     role,
     uf,
-    createdDate,
+    status = 'ATIVO',
+    createdDate = String(new Date().toLocaleDateString()),
   }: ICreateWorkerDTO): Promise<Worker> {
     const newWorker = await this.ormRepository.create({
       name,
       cpf,
       salary,
-      status: 'ATIVO',
+      status,
       role,
       uf,
-      createdDate: String(new Date().toLocaleDateString()),
+      createdDate,
     });
 
-    await this.ormRepository.save(newWorker);
+    await this.saveORM(newWorker);
 
     return newWorker;
   }
@@ -85,7 +88,7 @@ class WorkersRepository implements IWorkersRepository {
     return worker;
   }
 
-  public async save(worker: Worker): Promise<Worker> {
+  public async saveORM(worker: Worker): Promise<Worker> {
     return this.ormRepository.save(worker);
   }
 }

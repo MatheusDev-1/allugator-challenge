@@ -37,7 +37,7 @@ class FakeWorkerRepository implements IWorkersRepository {
     return findWorker;
   }
 
-  public async create(workerData: ICreateUserDTO): Promise<Worker> {
+  public async createWorker(workerData: ICreateUserDTO): Promise<Worker> {
     const worker = new Worker();
 
     Object.assign(worker, { id: uuid_v4() }, workerData);
@@ -64,7 +64,7 @@ class FakeWorkerRepository implements IWorkersRepository {
     return workersBySalary;
   }
 
-  public async save(worker: Worker): Promise<Worker> {
+  public async saveORM(worker: Worker): Promise<Worker> {
     const findIndex = this.workers.findIndex(
       findWorker => findWorker.cpf === worker.cpf,
     );

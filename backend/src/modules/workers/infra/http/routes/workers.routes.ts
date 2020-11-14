@@ -1,13 +1,16 @@
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Router } from 'express';
+import multer from 'multer';
+import uploadConfig from '../../../../../config/upload';
 
 import WorkersController from '../controllers/WorkersController';
 
 const workersRouter = Router();
 const workersController = new WorkersController();
+const upload = multer(uploadConfig);
 
-workersRouter.get('/', workersController.show);
-
+workersRouter.get('/', workersController.index);
+workersRouter.post('/import', upload.single('file'), workersController.import);
 workersRouter.post(
   '/',
   celebrate({

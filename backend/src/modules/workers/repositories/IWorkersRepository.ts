@@ -10,6 +10,6 @@ export default interface IWorkersRepository {
   findByDate(date: string): Promise<Worker[]>;
   findByUF(uf: string): Promise<Worker[]>;
   findBySalary(minSalary: number, maxSalary: number): Promise<Worker[]>;
-  create(data: ICreateWorkerDTO): Promise<Worker>;
-  save(user: Worker): Promise<Worker>;
+  createWorker(data: ICreateWorkerDTO): Promise<Worker>;
+  saveORM(user: Worker): Promise<Worker>;
 }
