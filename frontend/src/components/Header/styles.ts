@@ -33,7 +33,7 @@ export const LogoContainer = styled.div`
 
 export const NavContainer = styled.div`
   display: flex;
-  width: 700px;
+  width: 800px;
   justify-content: space-around;
   align-items: center;
   padding: 30px;

@@ -8,7 +8,7 @@ interface RouteProps extends ReactDOMRouteProps {
   component: React.ComponentType;
 }
 
-const Rout: React.FC<RouteProps> = ({ component: Component, ...rest }) => {
+const Route: React.FC<RouteProps> = ({ component: Component, ...rest }) => {
   return (
     <ReactDOMRoute
       {...rest}
@@ -19,4 +19,4 @@ const Rout: React.FC<RouteProps> = ({ component: Component, ...rest }) => {
   );
 };
 
-export default Rout;
+export default Route;
