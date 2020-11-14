@@ -3,4 +3,6 @@ export default interface IFindAllWorkersDTO {
   uf?: string;
   status?: string;
   createdDate?: string;
+  minSalary?: number;
+  maxSalary?: number;
 }

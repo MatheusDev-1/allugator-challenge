@@ -5,6 +5,7 @@ import DeleteWorkerService from '@modules/workers/services/DeleteWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
 import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
+import { Between } from 'typeorm';
 
 export default class WorkersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -26,7 +27,15 @@ export default class WorkersController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { createdDate, role, uf, status } = request.query;
+    const {
+      createdDate,
+      role,
+      uf,
+      status,
+      salary,
+      minSalary,
+      maxSalary,
+    } = request.query;
 
     let where = {};
 
@@ -43,7 +52,9 @@ export default class WorkersController {
       Object.assign(where, { status });
     }
 
-    console.log(where);
+    if (minSalary && maxSalary) {
+      Object.assign(where, { salary: Between(minSalary, maxSalary) });
+    }
 
     const listWorkersService = container.resolve(ListWorkersService);
 

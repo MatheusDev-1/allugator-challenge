@@ -16,6 +16,18 @@ class ListWorkersService {
   public async execute(data: IFindAllWorkersDTO): Promise<Worker[]> {
     const workers = await this.workersRepository.findAllWorkers(data);
 
+    const { minSalary, maxSalary } = data;
+
+    if (minSalary && maxSalary) {
+      const minWageWorkers = workers.filter(
+        worker =>
+          Number(worker.salary) >= Number(minSalary) &&
+          Number(worker.salary) <= Number(maxSalary),
+      );
+
+      return minWageWorkers;
+    }
+
     return workers;
   }
 }

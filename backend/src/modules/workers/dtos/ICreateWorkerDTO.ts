@@ -6,4 +6,6 @@ export default interface ICreateWorkerDTO {
   uf: string;
   salary: number;
   status: string;
+  minSalary?: number;
+  maxSalary?: number;
 }

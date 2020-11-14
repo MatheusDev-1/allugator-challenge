@@ -15,7 +15,9 @@ class FakeWorkerRepository implements IWorkersRepository {
           worker.createdDate === data.createdDate ||
           worker.role === data.role ||
           worker.status === data.status ||
-          worker.uf === data.uf,
+          worker.uf === data.uf ||
+          (worker.salary >= Number(data.minSalary) &&
+            worker.salary <= Number(data.maxSalary)),
       );
 
       return queriedWorkers;

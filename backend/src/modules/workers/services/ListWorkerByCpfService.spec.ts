@@ -1,20 +1,20 @@
 import AppError from '../../../shared/errors/AppError';
 import FakeWorkerRepository from '../repositories/fakes/FakeWorkerRepository';
 import CreateWorkerService from './CreateWorkerService';
-import ListWorkerByNameService from './ListWorkerByNameService';
+import ListWorkerByCpfService from './ListWorkerByCpfService';
 
 let fakeWorkerRepository: FakeWorkerRepository;
 let createWorker: CreateWorkerService;
-let listWorkerByName: ListWorkerByNameService;
+let listWorkerByCpf: ListWorkerByCpfService;
 
-describe('List worker by name', () => {
+describe('List worker by cpf', () => {
   beforeEach(() => {
     fakeWorkerRepository = new FakeWorkerRepository();
     createWorker = new CreateWorkerService(fakeWorkerRepository);
-    listWorkerByName = new ListWorkerByNameService(fakeWorkerRepository);
+    listWorkerByCpf = new ListWorkerByCpfService(fakeWorkerRepository);
   });
 
-  it('should be able to list worker by name', async () => {
+  it('should be able to list worker by cpf', async () => {
     const worker = await createWorker.execute({
       name: 'Aninha Alligator',
       salary: 9000,
@@ -26,14 +26,14 @@ describe('List worker by name', () => {
     });
 
     if (worker) {
-      const workerByName = await listWorkerByName.execute(worker.name);
+      const workerByCpf = await listWorkerByCpf.execute(worker.cpf);
 
-      expect(workerByName).toEqual(worker);
+      expect(workerByCpf).toEqual(worker);
     }
   });
 
-  it('should not be able to list worker by name if worker does not exist', async () => {
-    await expect(listWorkerByName.execute('John Doe')).rejects.toBeInstanceOf(
+  it('should not be able to list worker by cpf if worker does not exist', async () => {
+    await expect(listWorkerByCpf.execute('John Doe')).rejects.toBeInstanceOf(
       AppError,
     );
   });

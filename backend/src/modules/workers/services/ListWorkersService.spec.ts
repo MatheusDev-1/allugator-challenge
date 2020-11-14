@@ -200,4 +200,33 @@ describe('List all workers with and query parameters', () => {
 
     expect(allWorkers).toEqual([secondWorker, thirdWorker]);
   });
+
+  it('should be able to list workers by salary range', async () => {
+    await createWorker.execute({
+      name: 'Dantas Alligator',
+      salary: 3000,
+      cpf: '12345678909',
+      status: 'ATIVO',
+      role: 'Business',
+      createdDate: '12/11/2020',
+      uf: 'DF',
+    });
+
+    const secondWorker = await createWorker.execute({
+      name: 'Márcia Alligator',
+      salary: 4000,
+      cpf: '321654987',
+      status: 'ATIVO',
+      role: 'CEO',
+      createdDate: '12/11/2020',
+      uf: 'SP',
+    });
+
+    const allWorkers = await listWorkers.execute({
+      minSalary: 4000,
+      maxSalary: 9000,
+    });
+
+    expect(allWorkers).toEqual([secondWorker]);
+  });
 });

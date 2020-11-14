@@ -3,17 +3,8 @@ import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 
 import Worker from '../infra/typeorm/entities/Worker';
+import ICreateWorkerDTO from '../dtos/ICreateWorkerDTO';
 import IWorkersRepository from '../repositories/IWorkersRepository';
-
-interface Request {
-  role: string;
-  cpf: string;
-  name: string;
-  uf: string;
-  salary: number;
-  status: string;
-  createdDate: string;
-}
 
 @injectable()
 class CreateWorkerService {
@@ -30,7 +21,9 @@ class CreateWorkerService {
     uf,
     salary,
     status,
-  }: Request): Promise<Worker | undefined> {
+    minSalary,
+    maxSalary,
+  }: ICreateWorkerDTO): Promise<Worker | undefined> {
     const workerExistenceByCPF = await this.workersRepository.findByCPF(cpf);
 
     if (workerExistenceByCPF) {
@@ -47,6 +40,8 @@ class CreateWorkerService {
       uf,
       salary,
       status,
+      minSalary,
+      maxSalary,
     });
 
     return worker;

@@ -13,10 +13,9 @@ class DeleteWorkerService {
 
   public async execute(cpf: string): Promise<any> {
     const worker = await this.workersRepository.findByCPF(cpf);
-    console.log(worker);
 
     if (worker) {
-      this.workersRepository.deleteWorker(worker);
+      await this.workersRepository.deleteWorker(worker);
     }
   }
 }
