@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { Container, LogoContainer, NavContainer } from './styles';
 
 const Header: React.FC = () => {
-  const logoName = '{ionarios}';
+  const bracketsName = '{ionários}';
 
   return (
     <Container>
       <LogoContainer>
         <p className="highlight">Allugator | Func()</p>
-        <p className="logo">{logoName}</p>
+        <p className="logo">{bracketsName}</p>
       </LogoContainer>
       <NavContainer>
         <Link className="nav selected" to="/">

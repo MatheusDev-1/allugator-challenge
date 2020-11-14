@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 100px;
   margin-top: 20px;
 `;
 
@@ -14,6 +14,7 @@ export const LogoContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 30px;
+  margin-left: 15px;
 
   p {
     color: black;

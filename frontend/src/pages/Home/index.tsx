@@ -7,6 +7,8 @@ import {
   Frame,
   InfoFrame,
   AlligatorContainer,
+  CardsContainer,
+  Card,
 } from './styles';
 
 const Home: React.FC = () => {
@@ -26,6 +28,16 @@ const Home: React.FC = () => {
               alugar ao invés de comprar, poder economizar muito dinheiro e
               ainda ter as coisas que sempre sonhou
             </p>
+            <CardsContainer>
+              <Card>
+                <span>125</span>
+                <b>Funcionários</b>
+              </Card>
+              <Card>
+                <span>27</span>
+                <b>Estados</b>
+              </Card>
+            </CardsContainer>
           </InfoFrame>
           <AlligatorContainer>
             <img alt="bigAlligator" src={alligator} />
