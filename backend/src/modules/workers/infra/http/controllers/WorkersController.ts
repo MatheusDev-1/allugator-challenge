@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateWorkerService from '@modules/workers/services/CreateWorkerService';
+import DeleteWorkerService from '@modules/workers/services/DeleteWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
 import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
@@ -73,5 +74,15 @@ export default class WorkersController {
       error: false,
       message: 'Workers data imported sucessfuly on PostgreSQL',
     });
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { cpf } = request.params;
+
+    const deleteService = container.resolve(DeleteWorkerService);
+
+    deleteService.execute(cpf);
+
+    return response.json({ error: false, message: 'worker data deleted' });
   }
 }

@@ -55,19 +55,8 @@ class WorkersRepository
     return worker;
   }
 
-  public async findByDate(createdDate: string): Promise<Worker[]> {
-    const workers = await this.ormRepository.find({ where: { createdDate } });
-    return workers;
-  }
-
   public async findByName(name: string): Promise<Worker | undefined> {
     const worker = await this.ormRepository.findOne(name);
-
-    return worker;
-  }
-
-  public async findByRole(role: string): Promise<Worker[]> {
-    const worker = await this.ormRepository.find({ where: { role } });
 
     return worker;
   }
@@ -89,6 +78,10 @@ class WorkersRepository
     });
 
     return worker;
+  }
+
+  public async deleteWorker(worker: Worker): Promise<any> {
+    this.ormRepository.remove(worker);
   }
 
   public async saveORM(worker: Worker): Promise<Worker> {

@@ -10,7 +10,7 @@ const workersController = new WorkersController();
 const upload = multer(uploadConfig);
 
 workersRouter.get('/', workersController.index);
-
+workersRouter.delete('/:cpf', workersController.delete);
 workersRouter.post('/import', upload.single('file'), workersController.import);
 workersRouter.post(
   '/',

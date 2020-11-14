@@ -36,20 +36,6 @@ class FakeWorkerRepository implements IWorkersRepository {
     return findWorker;
   }
 
-  public async findByDate(createdDate: string): Promise<Worker[]> {
-    const findWorker = this.workers.filter(
-      worker => worker.createdDate === createdDate,
-    );
-
-    return findWorker;
-  }
-
-  public async findByRole(role: string): Promise<Worker[]> {
-    const findWorker = this.workers.filter(worker => worker.role === role);
-
-    return findWorker;
-  }
-
   public async createWorker(workerData: ICreateUserDTO): Promise<Worker> {
     const worker = new Worker();
 
@@ -75,6 +61,12 @@ class FakeWorkerRepository implements IWorkersRepository {
     );
 
     return workersBySalary;
+  }
+
+  public async deleteWorker(worker: Worker): Promise<any> {
+    const toDeleteIndex = await this.workers.indexOf(worker);
+
+    return this.workers.splice(toDeleteIndex, 1);
   }
 
   public async saveORM(worker: Worker): Promise<Worker> {
