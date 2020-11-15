@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -21,6 +21,25 @@ export const Frame = styled.div`
   margin-left: 20px;
 `;
 
+const fadeMovingLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }`;
+
 export const InfoFrame = styled.div`
   display: flex;
   height: 700px;
@@ -31,16 +50,17 @@ export const InfoFrame = styled.div`
 
   h1 {
     color: black;
-    font-family: 'Quattrocento Sans', sans-serif;
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 30px;
+    animation: ${fadeMovingLeft} 2s;
   }
 
   p {
     margin-top: 20px;
     color: #a0a0a0;
     font-weight: 100;
+    animation: ${fadeMovingLeft} 2s;
   }
 `;
 
@@ -51,6 +71,7 @@ export const AlligatorContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  animation: ${fadeIn} 3s;
 
   img {
     width: 90%;
@@ -63,6 +84,7 @@ export const CardsContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   height: 100%;
+  animation: ${fadeIn} 3s;
 `;
 
 export const Card = styled.div`
@@ -73,16 +95,23 @@ export const Card = styled.div`
   width: 200px;
   height: 130px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+  }
 
   span {
     color: #00b934;
     font-weight: bold;
     font-size: 48px;
+    cursor: default;
   }
 
   b {
     color: black;
     font-weight: bold;
     font-size: 24px;
+    cursor: default;
   }
 `;

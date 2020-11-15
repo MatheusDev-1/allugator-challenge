@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  justify-self: self-start;
   width: 100%;
   height: 100px;
   margin-top: 20px;
@@ -41,7 +42,7 @@ export const NavContainer = styled.div`
 
   a.nav {
     padding: 5px;
-    color: #b6b6b6;
+    color: black;
     font-family: 'Quattrocento Sans', sans-serif;
     font-size: 18px;
     cursor: pointer;

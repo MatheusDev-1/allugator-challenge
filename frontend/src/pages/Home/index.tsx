@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import Header from '../../components/Header';
 import alligator from '../../assets/alligator.png';
 import {
@@ -11,7 +12,47 @@ import {
   Card,
 } from './styles';
 
+interface Worker {
+  id: string;
+  createdDate: string;
+  role: string;
+  cpf: string;
+  name: string;
+  uf: string;
+  salary: number;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface UF {
+  UF: string;
+  quantity: number;
+}
+
 const Home: React.FC = () => {
+  const [workersQuantity, setWorkersQuantity] = useState<Worker[]>([]);
+  const [ufQuantity, setUfQuantity] = useState<UF[]>([]);
+
+  useEffect(() => {
+    const findWorkersQuantity = async (): Promise<string> => {
+      const response = await api.get('/worker?status=ATIVO');
+      setWorkersQuantity(response.data.length);
+
+      return response.data.length;
+    };
+
+    const findUfQuantity = async (): Promise<string> => {
+      const response = await api.get('/worker/groupedByUf');
+      setUfQuantity(response.data.length);
+
+      return response.data.length;
+    };
+
+    findWorkersQuantity();
+    findUfQuantity();
+  }, []);
+
   return (
     <Container className="headerContainer">
       <MainFrame className="panelContainer">
@@ -30,11 +71,11 @@ const Home: React.FC = () => {
             </p>
             <CardsContainer>
               <Card>
-                <span>125</span>
+                <span>{workersQuantity}</span>
                 <b>Funcionários</b>
               </Card>
               <Card>
-                <span>27</span>
+                <span>{ufQuantity}</span>
                 <b>Estados</b>
               </Card>
             </CardsContainer>

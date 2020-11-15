@@ -12,7 +12,7 @@ const Route: React.FC<RouteProps> = ({ component: Component, ...rest }) => {
   return (
     <ReactDOMRoute
       {...rest}
-      render={() => {
+      render={({ location }) => {
         return <Component />;
       }}
     />

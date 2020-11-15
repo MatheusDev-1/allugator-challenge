@@ -4,6 +4,7 @@ import { Container, LogoContainer, NavContainer } from './styles';
 
 const Header: React.FC = () => {
   const bracketsName = '{ionários}';
+  const selectedPage = window.location.pathname.split('/')[1];
 
   return (
     <Container>
@@ -15,7 +16,7 @@ const Header: React.FC = () => {
         <Link className="nav selected" to="/">
           Inicio
         </Link>
-        <Link className="nav" to="/">
+        <Link className="nav" to="/workers">
           Lista de Funcionários
         </Link>
         <Link className="nav" to="/">
