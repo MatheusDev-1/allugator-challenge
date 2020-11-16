@@ -39,17 +39,6 @@ class FakeWorkerRepository implements IWorkersRepository {
   }
 
   public async createWorker(workerData: ICreateUserDTO): Promise<Worker> {
-    const workerExist = await this.findByCPF(workerData.cpf);
-
-    if (workerExist) {
-      workerExist.name = workerData.name;
-      workerExist.salary = workerData.salary;
-      workerExist.uf = workerData.uf;
-      workerExist.role = workerData.role;
-
-      this.workers.push(workerExist);
-      return workerExist;
-    }
     const worker = new Worker();
 
     Object.assign(worker, { id: uuid_v4() }, workerData);
@@ -77,7 +66,7 @@ class FakeWorkerRepository implements IWorkersRepository {
     return grouped;
   }
 
-  public async deleteWorker(worker: Worker): Promise<any> {
+  public async deleteWorker(worker: Worker): Promise<Worker[]> {
     const toDeleteIndex = this.workers.indexOf(worker);
 
     return this.workers.splice(toDeleteIndex, 1);

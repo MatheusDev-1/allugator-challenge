@@ -14,7 +14,7 @@ workersRouter.get(
   celebrate({
     [Segments.QUERY]: {
       name: Joi.string().optional().allow('').max(256),
-      cpf: Joi.string().optional().allow('').max(11),
+      cpf: Joi.string().optional().allow('').max(14),
       createdDate: Joi.string().optional().allow(''),
       role: Joi.string().max(256).optional().allow(''),
       minSalary: Joi.number().optional().allow(''),
@@ -31,7 +31,7 @@ workersRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required().max(256),
-      cpf: Joi.string().required().max(11),
+      cpf: Joi.string().required().max(14),
       createdDate: Joi.string(),
       role: Joi.string().optional().allow('').default(''),
       uf: Joi.string().optional().allow('').default(''),

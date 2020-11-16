@@ -34,10 +34,8 @@ export const MainFrame = styled.div`
   border-radius: 25px;
 `;
 
-export const FormsFrame = styled.div`
+export const ButtonsFrame = styled.div`
   display: flex;
-  width: 90%;
-  height: 25%;
 `;
 
 export const InsertDataFormFrame = styled.div`
@@ -65,6 +63,15 @@ export const InsertDataFormFrame = styled.div`
       box-shadow: 0px 3px 10px rgba(0, 182, 52, 0.4);
     }
   }
+`;
+
+export const UploadContainer = styled.input`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  animation: ${fadeIn} 2s;
+  border: 1px solid black;
 `;
 
 export const InputContainer = styled.div`
@@ -96,31 +103,6 @@ export const ButtonInsertForm = styled.div`
     font-size: 25px;
     font-weight: bold;
     color: #00b934;
-    cursor: pointer;
-  }
-`;
-
-export const ButtonDeleteForm = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  border: 1px solid #9f1111;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0);
-
-  transition: box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0px 3px 10px rgba(159, 17, 17, 0.4);
-  }
-
-  span {
-    font-size: 25px;
-    font-weight: bold;
-    color: #9f1111;
     cursor: pointer;
   }
 `;

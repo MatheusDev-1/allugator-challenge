@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import api from '../../services/api';
+import Upload from '../../components/Upload';
 import GlobalModal from '../../components/Modal';
 import '../../assets/funcionarios.csv';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
@@ -9,24 +9,38 @@ import Header from '../../components/Header';
 import {
   Container,
   MainFrame,
-  FormsFrame,
+  ButtonsFrame,
   InsertDataFormFrame,
 } from './styles';
 
 import DataTable from '../../components/DataTable';
 
+interface FileProps {
+  file: File;
+  name: string;
+}
+
 const Workers: React.FC = () => {
   const [modal, setModal] = useState(false);
-  const [upload, setUpload] = useState(false);
 
-  const handleFileImport = async (): Promise<void> => {
+  const handleUpload = async(files: File[]): Promise<void> => {
     const data = new FormData();
 
-    data.append('file', '../../assets/funcionarios.csv', 'funcionarios.csv');
+    data.append('file', files[0], files[0].name);
 
-    // await api.post('/worker/import', data);
-    setUpload(true);
-  };
+    try {
+      await api.post('/worker/import', data);
+      await window.location.reload();
+    } catch (err) {
+      console.log(err.response.error);
+    }
+
+  }
+
+  const submitFile = async(files: File[]): Promise<void> => {
+    await handleUpload(files);
+  }
+
 
   const handleCloseModal = async (): Promise<void> => {
     setModal(false);
@@ -38,15 +52,14 @@ const Workers: React.FC = () => {
       <Container modal={modal} className="headerContainer">
         <MainFrame className="panelContainer">
           <Header />
-
-          <FormsFrame />
           <DataTable />
-          <InsertDataFormFrame onClick={() => setModal(true)}>
-            <h1>Adicionar funcionário</h1>
-          </InsertDataFormFrame>
-          <InsertDataFormFrame onClick={() => handleFileImport()}>
-            <h1>Carregar funcionários por listagem</h1>
-          </InsertDataFormFrame>
+          <ButtonsFrame>
+            <InsertDataFormFrame onClick={() => setModal(true)}>
+              <h1>Adicionar funcionário</h1>
+            </InsertDataFormFrame>
+            <Upload onUpload={submitFile}></Upload>
+          </ButtonsFrame>
+
         </MainFrame>
       </Container>
     </>

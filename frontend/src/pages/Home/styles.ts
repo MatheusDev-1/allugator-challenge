@@ -45,19 +45,19 @@ export const InfoFrame = styled.div`
   height: 700px;
   flex-direction: column;
   max-width: 500px;
-  padding-top: 120px;
+  padding-top: 80px;
   padding-left: 45px;
 
   h1 {
     color: black;
     font-size: 48px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     animation: ${fadeMovingLeft} 2s;
   }
 
   p {
-    margin-top: 20px;
+    margin-top: 15px;
     color: #a0a0a0;
     font-weight: 100;
     animation: ${fadeMovingLeft} 2s;

@@ -1,5 +1,6 @@
 import { getRepository, Repository, EntityRepository } from 'typeorm';
 
+import { format } from 'date-fns';
 import IWorkersRepository from '@modules/workers/repositories/IWorkersRepository';
 import ICreateWorkerDTO from '@modules/workers/dtos/ICreateWorkerDTO';
 import IFindAllWorkersDTO from '@modules/workers/dtos/IFindAllWorkersDTO';
@@ -32,7 +33,7 @@ class WorkersRepository
     role,
     uf,
     status = 'ATIVO',
-    createdDate = new Date().toLocaleDateString(),
+    createdDate = String(format(new Date(), 'dd/MM/yyyy')),
   }: ICreateWorkerDTO): Promise<Worker> {
     const newWorker = await this.ormRepository.create({
       name,
@@ -56,7 +57,7 @@ class WorkersRepository
   }
 
   public async findByName(name: string): Promise<Worker | undefined> {
-    const worker = await this.ormRepository.findOne({ where: { name }});
+    const worker = await this.ormRepository.findOne({ where: { name } });
 
     return worker;
   }
@@ -83,7 +84,7 @@ class WorkersRepository
     return grouped;
   }
 
-  public async deleteWorker(worker: Worker): Promise<any> {
+  public async deleteWorker(worker: Worker): Promise<void> {
     this.ormRepository.remove(worker);
   }
 

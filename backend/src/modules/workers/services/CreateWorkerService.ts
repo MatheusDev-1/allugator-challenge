@@ -31,6 +31,7 @@ class CreateWorkerService {
       workerExists.role = role;
 
       this.workersRepository.saveORM(workerExists);
+      return workerExists;
     }
     const worker = await this.workersRepository.createWorker({
       createdDate,

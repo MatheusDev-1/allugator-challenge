@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
+import cpfMask from '../../utils/cpfMask';
 import api from '../../services/api';
 import Input from '../Input';
 import { Container, Modal, InputContainer, Button, IconDelete } from './styles';
@@ -18,7 +19,14 @@ const GlobalModal: React.FC<ModalProps> = ({ closeModal }: ModalProps) => {
 
   const handleAddWorker = async (): Promise<void> => {
     const parsedSalary = Number(salary);
-    const data = { name, cpf, role, uf, salary: parsedSalary };
+    const parsedCpf = cpf.replace('.', '').replace('.', '').replace('-', '');
+    const data = {
+      name,
+      cpf: parsedCpf,
+      role,
+      uf,
+      salary: parsedSalary,
+    };
 
     const schema = Yup.object().shape({
       name: Yup.string().required('É obrigatório preencher o Nome'),
@@ -29,6 +37,7 @@ const GlobalModal: React.FC<ModalProps> = ({ closeModal }: ModalProps) => {
       await schema.validate(data, { abortEarly: false });
       api.post('/worker', data);
       closeModal();
+      window.location.reload();
     } catch (err) {
       setValidationError(true);
     }
@@ -50,7 +59,7 @@ const GlobalModal: React.FC<ModalProps> = ({ closeModal }: ModalProps) => {
             className="large"
             placeholder="CPF"
             value={cpf}
-            onChange={e => setCpf(e.target.value)}
+            onChange={e => setCpf(cpfMask(e.target.value))}
           />
           <Input
             className="large"

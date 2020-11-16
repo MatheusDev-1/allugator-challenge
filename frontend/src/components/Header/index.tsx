@@ -34,8 +34,8 @@ const Header: React.FC = () => {
         >
           Lista de Funcionários
         </Link>
-        <Link className="nav" to="/depo">
-          Depoimentos
+        <Link className="nav" to="/hire">
+          Contratar Funcionário
         </Link>
       </NavContainer>
     </Container>

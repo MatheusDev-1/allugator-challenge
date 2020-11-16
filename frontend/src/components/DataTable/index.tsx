@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import GlobalInput from '../Input';
-
+import cpfMask from '../../utils/cpfMask';
 import formatValue from '../../utils/formatValue';
 import api from '../../services/api';
 import {
@@ -40,7 +40,8 @@ const DataTable: React.FC = () => {
   const [status, setStatus] = useState<string>('');
 
   const handleQueryString = async (): Promise<string> => {
-    return `name=${name}&cpf=${cpf}&role=${role}&uf=${uf}&minSalary=${minSalary}&maxSalary=${maxSalary}&status=${status}&createdDate=${date}`;
+    const parsedCpf = cpf.replace('.', '').replace('.', '').replace('-', '');
+    return `name=${name}&cpf=${parsedCpf}&role=${role}&uf=${uf}&minSalary=${minSalary}&maxSalary=${maxSalary}&status=${status}&createdDate=${date}`;
   };
 
   const handleLoadData = async (): Promise<Worker[]> => {
@@ -79,7 +80,7 @@ const DataTable: React.FC = () => {
           className="filter"
           placeholder="CPF"
           value={cpf}
-          onChange={e => setCpf(e.target.value)}
+          onChange={e => setCpf(cpfMask(e.target.value))}
         />
         <GlobalInput
           className="filter"
@@ -140,7 +141,7 @@ const DataTable: React.FC = () => {
               {workers.map(worker => (
                 <tr key={worker.id} style={{ alignContent: 'center' }}>
                   <td>{worker.name}</td>
-                  <td>{worker.cpf}</td>
+                  <td>{cpfMask(worker.cpf)}</td>
                   <td>{worker.role}</td>
                   <td>{worker.uf}</td>
                   <td>{formatValue(Number(worker.salary))}</td>
