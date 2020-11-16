@@ -1,5 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
+interface ModalProps {
+  modal: boolean;
+}
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -13,6 +17,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.5s ease-in-out;
+
+  opacity: ${({ modal }: ModalProps): number => (modal ? 0.3 : 1)};
 `;
 
 export const MainFrame = styled.div`

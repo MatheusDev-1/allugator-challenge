@@ -72,7 +72,7 @@ export const IconDelete = styled(TiDeleteOutline)`
 export const Loader = styled(Load)`
   width: 100px;
   height: 100px;
-  margin-left: 550px;
+  margin-left: 570px;
   margin-top: 100px;
   border: 4px solid #cecece;
   border-top-color: transparent;

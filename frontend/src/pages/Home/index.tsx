@@ -61,13 +61,15 @@ const Home: React.FC = () => {
           <InfoFrame>
             <h1>O melhor lugar para se trabalhar</h1>
             <p>
-              Com uma lista crescente de funcionários, a Allugator vem se
-              destacando atualmente como o melhor local de trabalho.
+              Com uma lista crescente de funcionários, a{' '}
+              <strong>Allugator</strong> vem se destacando atualmente como o
+              melhor local para se trabalhar.
             </p>
             <p>
               O propósito da empresa também é inovador e desperta curiosidade:
-              alugar ao invés de comprar, poder economizar muito dinheiro e
-              ainda ter as coisas que sempre sonhou
+              <strong>alugar</strong> ao invés de comprar, fazer um assinatura
+              de produtos poder economizar muito dinheiro, tendo as coisas que
+              sempre sonhou
             </p>
             <CardsContainer>
               <Card>

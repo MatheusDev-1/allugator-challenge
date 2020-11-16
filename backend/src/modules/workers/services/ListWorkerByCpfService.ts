@@ -16,11 +16,10 @@ class ListWorkerByCpfService {
   public async execute(cpf: string): Promise<Worker> {
     const workers = await this.workersRepository.findByCPF(cpf);
 
-    if (workers) {
-      return workers;
+    if (!workers) {
+      throw new AppError('Worker does not exist or mistyped cpf');
     }
-
-    throw new AppError('Worker does not exist or mistyped cpf');
+    return workers;
   }
 }
 

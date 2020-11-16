@@ -1,5 +1,6 @@
-import React from 'react';
-import Input from '../../components/Input';
+import React, { useState } from 'react';
+
+import GlobalModal from '../../components/Modal';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 import Header from '../../components/Header';
@@ -13,18 +14,27 @@ import {
 import DataTable from '../../components/DataTable';
 
 const Workers: React.FC = () => {
-  return (
-    <Container className="headerContainer">
-      <MainFrame className="panelContainer">
-        <Header />
+  const [modal, setModal] = useState(false);
 
-        <FormsFrame />
-        <DataTable />
-        <InsertDataFormFrame>
-          <h1>Adicionar funcionário</h1>
-        </InsertDataFormFrame>
-      </MainFrame>
-    </Container>
+  const handleCloseModal = async (): Promise<void> => {
+    setModal(false);
+  };
+
+  return (
+    <>
+      {modal && <GlobalModal closeModal={handleCloseModal} />}
+      <Container modal={modal} className="headerContainer">
+        <MainFrame className="panelContainer">
+          <Header />
+
+          <FormsFrame />
+          <DataTable />
+          <InsertDataFormFrame onClick={() => setModal(true)}>
+            <h1>Adicionar funcionário</h1>
+          </InsertDataFormFrame>
+        </MainFrame>
+      </Container>
+    </>
   );
 };
 

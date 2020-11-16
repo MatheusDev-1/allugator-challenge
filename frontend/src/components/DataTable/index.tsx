@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTransition, animated } from 'react-spring';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-import { Table } from 'react-bulma-components';
 
 import GlobalInput from '../Input';
 
@@ -32,17 +28,27 @@ interface Worker {
 
 const DataTable: React.FC = () => {
   const [workers, setWorkers] = useState<Worker[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [cpf, setCpf] = useState<string>('');
+  const [role, setRole] = useState<string>('');
+  const [uf, setUf] = useState<string>('');
+  const [minSalary, setMinSalary] = useState<string>('');
+  const [maxSalary, setMaxSalary] = useState<string>('');
+  const [date, setDate] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
+
+  const handleQueryString = async (): Promise<void> => {
+  };
 
   const handleLoadData = async (): Promise<Worker[]> => {
-    const response = await api.get('/worker');
+    const response = await api.get('/worker?');
     setWorkers(response.data);
     return response.data;
   };
 
-  const handleDeleteByCPF = async (cpf: string): Promise<void> => {
-    await api.delete(`http://localhost:3333/worker/${cpf}`);
-    // handleLoadData();
+  const handleDeleteByCPF = async (cpfData: string): Promise<void> => {
+    await api.delete(`/worker/${cpfData}`);
     setTimeout(() => handleLoadData(), 100);
   };
 
@@ -61,14 +67,54 @@ const DataTable: React.FC = () => {
   return (
     <Container>
       <FilterContainer>
-        <GlobalInput className="filter" placeholder="Nome" />
-        <GlobalInput className="filter" placeholder="CPF" />
-        <GlobalInput className="filter" placeholder="Cargo" />
-        <GlobalInput className="small filter" placeholder="UF" />
-        <GlobalInput className="filter" placeholder="Min. Salário" />
-        <GlobalInput className="filter" placeholder="Max. Salário" />
-        <GlobalInput className="small filter" placeholder="Status" />
-        <GlobalInput className="filter" placeholder="Data" />
+        <GlobalInput
+          className="filter"
+          placeholder="Nome"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+        <GlobalInput
+          className="filter"
+          placeholder="CPF"
+          value={cpf}
+          onChange={e => setCpf(e.target.value)}
+        />
+        <GlobalInput
+          className="filter"
+          placeholder="Cargo"
+          value={role}
+          onChange={e => setRole(e.target.value)}
+        />
+        <GlobalInput
+          className="small filter"
+          placeholder="UF"
+          value={uf}
+          onChange={e => setUf(e.target.value)}
+        />
+        <GlobalInput
+          className="filter"
+          placeholder="Min. Salário"
+          value={minSalary}
+          onChange={e => setMinSalary(e.target.value)}
+        />
+        <GlobalInput
+          className="filter"
+          placeholder="Max. Salário"
+          value={maxSalary}
+          onChange={e => setMaxSalary(e.target.value)}
+        />
+        <GlobalInput
+          className="small filter"
+          placeholder="Status"
+          value={status}
+          onChange={e => setStatus(e.target.value)}
+        />
+        <GlobalInput
+          className="filter"
+          placeholder="Data"
+          value={date}
+          onChange={e => setDate(e.target.value)}
+        />
       </FilterContainer>
       <TableFrame loading={loading}>
         {loading ? (
@@ -89,7 +135,7 @@ const DataTable: React.FC = () => {
             </thead>
             <tbody>
               {workers.map(worker => (
-                <tr style={{ alignContent: 'center' }}>
+                <tr key={worker.id} style={{ alignContent: 'center' }}>
                   <td>{worker.name}</td>
                   <td>{worker.cpf}</td>
                   <td>{worker.role}</td>

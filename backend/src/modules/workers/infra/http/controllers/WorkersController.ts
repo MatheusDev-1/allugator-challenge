@@ -7,7 +7,7 @@ import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameS
 import ListWorkerByCpfService from '@modules/workers/services/ListWorkerByCpfService';
 import ListGroupedWorkersByUfService from '@modules/workers/services/ListGroupedWorkersByUfService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
-import { Between } from 'typeorm';
+import { Between, Like } from 'typeorm';
 
 export default class WorkersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -41,16 +41,16 @@ export default class WorkersController {
     let where = {};
 
     if (createdDate) {
-      Object.assign(where, { createdDate });
+      Object.assign(where, { createdDate: Like(`%${createdDate}%`) });
     }
     if (role) {
-      Object.assign(where, { role });
+      Object.assign(where, { role: Like(`%${role}%`) });
     }
     if (uf) {
-      Object.assign(where, { uf });
+      Object.assign(where, { uf: Like(`%${uf}%`) });
     }
     if (status) {
-      Object.assign(where, { status });
+      Object.assign(where, { status: Like(`%${status}%`) });
     }
 
     if (minSalary && maxSalary) {
@@ -117,8 +117,8 @@ export default class WorkersController {
 
     const deleteService = container.resolve(DeleteWorkerService);
 
-    deleteService.execute(cpf);
+    await deleteService.execute(cpf);
 
-    return response.json({ error: false, message: 'worker data deleted' });
+    return response.json({ message: 'Worker data deleted' });
   }
 }

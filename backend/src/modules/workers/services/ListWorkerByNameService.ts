@@ -16,11 +16,10 @@ class ListWorkerByNameService {
   public async execute(name: string): Promise<Worker> {
     const workers = await this.workersRepository.findByName(name);
 
-    if (workers) {
-      return workers;
+    if (!workers) {
+      throw new AppError('Worker does not exist or mistyped name');
     }
-
-    throw new AppError('Worker does not exist or mistyped name');
+    return workers;
   }
 }
 

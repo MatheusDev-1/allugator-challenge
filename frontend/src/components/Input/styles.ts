@@ -15,6 +15,10 @@ export const Input = styled.input`
   font-size: 18px;
   transition: border 0.2s ease-in-out;
 
+  &.large {
+    width: 300px;
+  }
+
   &.small {
     width: 100px;
   }

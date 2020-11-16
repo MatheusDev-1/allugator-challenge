@@ -18,6 +18,7 @@ class WorkersRepository
   }
 
   public async findAllWorkers(data: IFindAllWorkersDTO): Promise<Worker[]> {
+    console.log(data);
     const allWorkers = await this.ormRepository.find({
       where: data,
     });

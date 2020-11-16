@@ -21,16 +21,16 @@ class CreateWorkerService {
     uf,
     salary,
     status,
-    minSalary,
-    maxSalary,
   }: ICreateWorkerDTO): Promise<Worker | undefined> {
-    const workerExistenceByCPF = await this.workersRepository.findByCPF(cpf);
+    const workerExists = await this.workersRepository.findByCPF(cpf);
 
-    if (workerExistenceByCPF) {
-      const updateWorker = await this.workersRepository.createWorker(
-        workerExistenceByCPF,
-      );
-      return updateWorker;
+    if (workerExists) {
+      workerExists.name = name;
+      workerExists.salary = salary;
+      workerExists.uf = uf;
+      workerExists.role = role;
+
+      this.workersRepository.saveORM(workerExists);
     }
     const worker = await this.workersRepository.createWorker({
       createdDate,
@@ -40,8 +40,6 @@ class CreateWorkerService {
       uf,
       salary,
       status,
-      minSalary,
-      maxSalary,
     });
 
     return worker;
