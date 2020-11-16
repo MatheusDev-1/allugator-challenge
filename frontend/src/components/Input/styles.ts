@@ -20,11 +20,12 @@ export const Input = styled.input`
   }
 
   &.small {
-    width: 100px;
+    width: 120px;
   }
 
   &.filter {
-    color: #aeaeae;
+    color: black;
+    background-color: #fefefe;
   }
 
   &.filter:focus {

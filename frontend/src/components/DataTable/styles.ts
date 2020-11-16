@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { Loader as Load, Table } from 'react-bulma-components';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { VscSearch } from 'react-icons/vsc';
 
 interface loadingProps {
   loading?: boolean;
@@ -22,8 +23,8 @@ export const FilterContainer = styled.div`
   align-items: center;
   width: 95%;
   height: 60px;
-  margin-left: 60px;
   background-color: #eeeeee;
+  margin-left: 60px;
   animation: ${fadeIn} 0.3s ease-in-out;
 `;
 
@@ -66,6 +67,19 @@ export const IconDelete = styled(TiDeleteOutline)`
 
   &:hover {
     color: red;
+  }
+`;
+
+export const IconSearch = styled(VscSearch)`
+  width: 30px;
+  height: 30px;
+  color: darkgrey;
+  margin-right: 10px;
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: black;
   }
 `;
 

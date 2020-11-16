@@ -9,6 +9,7 @@ import {
   FilterContainer,
   TableFrame,
   IconDelete,
+  IconSearch,
   Loader,
   StyledTable,
 } from './styles';
@@ -33,16 +34,17 @@ const DataTable: React.FC = () => {
   const [cpf, setCpf] = useState<string>('');
   const [role, setRole] = useState<string>('');
   const [uf, setUf] = useState<string>('');
-  const [minSalary, setMinSalary] = useState<string>('');
+  const [minSalary, setMinSalary] = useState('');
   const [maxSalary, setMaxSalary] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [status, setStatus] = useState<string>('');
 
-  const handleQueryString = async (): Promise<void> => {
+  const handleQueryString = async (): Promise<string> => {
+    return `name=${name}&cpf=${cpf}&role=${role}&uf=${uf}&minSalary=${minSalary}&maxSalary=${maxSalary}&status=${status}&createdDate=${date}`;
   };
 
   const handleLoadData = async (): Promise<Worker[]> => {
-    const response = await api.get('/worker?');
+    const response = await api.get(`/worker?${await handleQueryString()}`);
     setWorkers(response.data);
     return response.data;
   };
@@ -92,13 +94,13 @@ const DataTable: React.FC = () => {
           onChange={e => setUf(e.target.value)}
         />
         <GlobalInput
-          className="filter"
+          className="small filter"
           placeholder="Min. Salário"
           value={minSalary}
           onChange={e => setMinSalary(e.target.value)}
         />
         <GlobalInput
-          className="filter"
+          className="small filter"
           placeholder="Max. Salário"
           value={maxSalary}
           onChange={e => setMaxSalary(e.target.value)}
@@ -115,6 +117,7 @@ const DataTable: React.FC = () => {
           value={date}
           onChange={e => setDate(e.target.value)}
         />
+        <IconSearch onClick={() => handleLoadData()} />
       </FilterContainer>
       <TableFrame loading={loading}>
         {loading ? (

@@ -3,8 +3,6 @@ import { container } from 'tsyringe';
 import CreateWorkerService from '@modules/workers/services/CreateWorkerService';
 import DeleteWorkerService from '@modules/workers/services/DeleteWorkerService';
 import ListWorkersService from '@modules/workers/services/ListWorkersService';
-import ListWorkerByNameService from '@modules/workers/services/ListWorkerByNameService';
-import ListWorkerByCpfService from '@modules/workers/services/ListWorkerByCpfService';
 import ListGroupedWorkersByUfService from '@modules/workers/services/ListGroupedWorkersByUfService';
 import ImportCsvService from '@modules/workers/services/ImportCsvService';
 import { Between, Like } from 'typeorm';
@@ -30,6 +28,8 @@ export default class WorkersController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const {
+      name,
+      cpf,
       createdDate,
       role,
       uf,
@@ -57,37 +57,19 @@ export default class WorkersController {
       Object.assign(where, { salary: Between(minSalary, maxSalary) });
     }
 
+    if (name) {
+      Object.assign(where, { name: Like(`%${name}%`) });
+    }
+
+    if (cpf) {
+      Object.assign(where, { cpf: Like(`%${cpf}%`) });
+    }
+
     const listWorkersService = container.resolve(ListWorkersService);
 
     const workers = await listWorkersService.execute(where);
 
     return response.json(workers);
-  }
-
-  public async searchByName(
-    request: Request,
-    response: Response,
-  ): Promise<Response> {
-    const { name } = request.body;
-
-    const listWorkerByNameService = container.resolve(ListWorkerByNameService);
-
-    const workers = await listWorkerByNameService.execute(name);
-
-    return response.json(workers);
-  }
-
-  public async searchByCPF(
-    request: Request,
-    response: Response,
-  ): Promise<Response> {
-    const { cpf } = request.body;
-
-    const listWorkerByCpfService = container.resolve(ListWorkerByCpfService);
-
-    const workerByCpf = await listWorkerByCpfService.execute(cpf);
-
-    return response.json(workerByCpf);
   }
 
   public async indexByUf(

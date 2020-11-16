@@ -13,12 +13,14 @@ workersRouter.get(
   '/',
   celebrate({
     [Segments.QUERY]: {
-      createdDate: Joi.string(),
-      role: Joi.string().max(256),
-      minSalary: Joi.number(),
-      maxSalary: Joi.number(),
-      uf: Joi.string().max(2),
-      status: Joi.string(),
+      name: Joi.string().optional().allow('').max(256),
+      cpf: Joi.string().optional().allow('').max(11),
+      createdDate: Joi.string().optional().allow(''),
+      role: Joi.string().max(256).optional().allow(''),
+      minSalary: Joi.number().optional().allow(''),
+      maxSalary: Joi.number().optional().allow(''),
+      uf: Joi.string().optional().allow(''),
+      status: Joi.string().optional().allow(''),
     },
   }),
   workersController.index,
@@ -43,8 +45,6 @@ workersRouter.post(
 workersRouter.get('/groupedByUf', workersController.indexByUf);
 
 workersRouter.post('/import', upload.single('file'), workersController.import);
-workersRouter.get('/searchByName', workersController.searchByName);
-workersRouter.get('/searchByCPF', workersController.searchByCPF);
 workersRouter.delete('/:cpf', workersController.delete);
 
 export default workersRouter;

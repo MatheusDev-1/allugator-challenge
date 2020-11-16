@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }`;
 
 export const Container = styled.div`
   display: flex;
@@ -48,12 +56,6 @@ export const NavContainer = styled.div`
     cursor: pointer;
     text-decoration: none;
     transition: 0.3s color ease-in-out;
-  }
-
-  a.nav.selected {
-    color: #6b6a6a;
-    font-weight: bold;
-    border-bottom: 2px solid #00b934;
   }
 
   a.nav:hover {

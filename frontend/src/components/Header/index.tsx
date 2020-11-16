@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, LogoContainer, NavContainer } from './styles';
 
 const Header: React.FC = () => {
   const bracketsName = '{ionários}';
-  const selectedPage = window.location.pathname.split('/')[1];
 
   return (
     <Container>
@@ -13,13 +12,29 @@ const Header: React.FC = () => {
         <p className="logo">{bracketsName}</p>
       </LogoContainer>
       <NavContainer>
-        <Link className="nav selected" to="/">
+        <Link
+          style={
+            useLocation().pathname === '/'
+              ? { borderBottom: '2px solid #00b934' }
+              : { borderBottom: '0px solid #bebebe' }
+          }
+          className="nav"
+          to="/"
+        >
           Inicio
         </Link>
-        <Link className="nav" to="/workers">
+        <Link
+          style={
+            useLocation().pathname === '/workers'
+              ? { borderBottom: '2px solid #00b934' }
+              : { borderBottom: '0px solid #bebebe' }
+          }
+          className="nav"
+          to="/workers"
+        >
           Lista de Funcionários
         </Link>
-        <Link className="nav" to="/">
+        <Link className="nav" to="/depo">
           Depoimentos
         </Link>
       </NavContainer>

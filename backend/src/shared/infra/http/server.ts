@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv/config';
+import axios from 'axios';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
