@@ -34,9 +34,9 @@ const Header: React.FC = () => {
         >
           Lista de Funcionários
         </Link>
-        <Link className="nav" to="/hire">
+        <a className="nav" href="https://api.whatsapp.com/send?phone=5561994294441">
           Contratar Funcionário
-        </Link>
+        </a>
       </NavContainer>
     </Container>
   );
