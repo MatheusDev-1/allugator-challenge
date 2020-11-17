@@ -5,7 +5,7 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
 # Setup
 
 ### Clonar Repositório
-    git clone https://github.com/MatheusDev-1/allugator-challenge
+    git clone https://github.com/MatheusDev-1/allugator-challenge.git
 
 ### Inicializar Docker com banco PostgreSQL
     USER: postgres
@@ -16,6 +16,9 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
 ### Backend
     cd allugator-challenge/backend && yarn
     yarn dev:server (após finalizar a instalação de todas as dependências)
+	yarn typeorm migration:run (para criar todas as tabelas no banco)
+	
+	É possível visualizar os dados do banco através do DBeaver ou Postbird
 
 ### Frontend
     cd allugator-challenge/frontend && yarn
