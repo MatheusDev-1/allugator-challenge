@@ -15,15 +15,10 @@ import {
 
 import DataTable from '../../components/DataTable';
 
-interface FileProps {
-  file: File;
-  name: string;
-}
-
 const Workers: React.FC = () => {
   const [modal, setModal] = useState(false);
 
-  const handleUpload = async(files: File[]): Promise<void> => {
+  const handleUpload = async (files: File[]): Promise<void> => {
     const data = new FormData();
 
     data.append('file', files[0], files[0].name);
@@ -34,13 +29,11 @@ const Workers: React.FC = () => {
     } catch (err) {
       console.log(err.response.error);
     }
+  };
 
-  }
-
-  const submitFile = async(files: File[]): Promise<void> => {
+  const submitFile = async (files: File[]): Promise<void> => {
     await handleUpload(files);
-  }
-
+  };
 
   const handleCloseModal = async (): Promise<void> => {
     setModal(false);
@@ -57,9 +50,8 @@ const Workers: React.FC = () => {
             <InsertDataFormFrame onClick={() => setModal(true)}>
               <h1>Adicionar funcionário</h1>
             </InsertDataFormFrame>
-            <Upload onUpload={submitFile}></Upload>
+            <Upload onUpload={submitFile} />
           </ButtonsFrame>
-
         </MainFrame>
       </Container>
     </>

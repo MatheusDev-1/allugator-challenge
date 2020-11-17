@@ -19,12 +19,16 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
 	yarn typeorm migration:run (para criar todas as tabelas no banco)
 	
 	É possível visualizar os dados do banco através do DBeaver ou Postbird
+	
+	http://localhost:3333
 
 ### Frontend
     cd allugator-challenge/frontend && yarn
     yarn start (após finalizar a instalação de todas as dependências)
     
     Na tela /workers, carregar arquivo .csv que está em allugator-challenge/backend/tmp/funcionarios.csv
+	
+	http://localhost:3000
 
 ## Algumas dependências utilizadas no backend/frontend
 

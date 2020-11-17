@@ -13,9 +13,7 @@ const Upload: React.FC<UploadProps> = ({ onUpload }: UploadProps) => {
     isDragRejest: boolean,
   ): ReactNode {
     if (!isDragActive) {
-      return (
-        <UploadMessage>Carregar funcionários .csv</UploadMessage>
-      );
+      return <UploadMessage>Carregar funcionários .csv</UploadMessage>;
     }
 
     if (isDragRejest) {
