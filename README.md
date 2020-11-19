@@ -57,7 +57,7 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
 |GET| /worker/groupedByUf       |  Retorna quantidade de funcionários e funcionários por UF  |       |   |
 |POST| /worker       |   Cria novo funcionário   |   Body    |   name, cpf, role, salary, uf   |
 |POST| /worker/import       |   Importa funcionários a partir de arquivo   |   Multipart-Form    |  file   |
-|DELETE| /worker/:cpf       |   Importa funcionários a partir de arquivo   |   Param String   |  cpf   |
+|DELETE| /worker/:cpf       |   Delete funcionário   |   Param String   |  cpf   |
 
 ## Considerações e possíveis adições
 Exemplos de features que colocaria na aplicação caso tivesse maior prazo de entrega
