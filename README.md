@@ -8,19 +8,29 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
     git clone https://github.com/MatheusDev-1/allugator-challenge.git
 
 ### Inicializar Docker com banco PostgreSQL
+    Host: localhost
+    Port: 5432
+    Database: postgres
     USER: postgres
     PASSWORD: seeyoulateralligator
     
     docker run --name allugator -e POSTGRES_PASSWORD=seeyoulateralligator -d -p 5432:5432 postgres 
+    
+    Instalar DBEAVER (https://dbeaver.io/download/)
+    Inicializar e criar nova conexão com banco de dados (Banco de dados -> Nova Conexão de Bancos -> PostgreSQL)
+    
+    Rodar script para instalar extensão "uuid-ossp", responsável por gerar automaticamente os uuids no banco (sem ela não é possível criar as tabelas)
+    Editor de SQL -> Novo editor de SQL
+   
+    create extension if not exists "uuid-ossp";
 
 ### Backend
     cd allugator-challenge/backend && yarn
     yarn dev:server (após finalizar a instalação de todas as dependências)
-	yarn typeorm migration:run (para criar todas as tabelas no banco)
+    
+    yarn typeorm migration:run (para criar todas as tabelas no banco)
 	
-	É possível visualizar os dados do banco através do DBeaver ou Postbird
-	
-	http://localhost:3333
+    http://localhost:3333
 
 ### Frontend
     cd allugator-challenge/frontend && yarn
