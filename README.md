@@ -11,7 +11,7 @@ Este repositório contém o código do desafio de uma vaga da Allugator. Seguem 
     USER: postgres
     PASSWORD: seeyoulateralligator
     
-    docker run --name allugator -e POSTGRES_PASSWORD=seeyoulateralligator -d postgres -p 5432:5432
+    docker run --name allugator -e POSTGRES_PASSWORD=seeyoulateralligator -d -p 5432:5432 postgres 
 
 ### Backend
     cd allugator-challenge/backend && yarn
