@@ -76,3 +76,5 @@ Exemplos de features que colocaria na aplicação caso tivesse maior prazo de en
 - Hooks e Context API
 - Animações quando houvesse inserções/remoções de dados na tabela
 - Rotas de update para todos os campos no backend
+
+- Ponto a desconsiderar
